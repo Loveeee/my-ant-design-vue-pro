@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import NotFound from "../views/404.vue";
@@ -19,16 +18,16 @@ const routes = [
         redirect: "/dashborad/analysis",
       },
       {
-        path: "/",
+        path: "dashboard",
         name: "dashboard",
         component: { render: (h) => h("router-view") },
         children: [
           {
-            path: "/dashboard/analysis",
+            path: "analysis",
             name: "analysis",
             component: () =>
               import(
-                /* webpackChunkName: "layout" */ "../views/Dashboard/Analysis"
+                /* webpackChunkName: "analysis" */ "../views/Dashboard/Analysis"
               ),
           },
         ],
@@ -48,13 +47,15 @@ const routes = [
         path: "/form/basic-form",
         name: "basicform",
         component: () =>
-          import(/* webpackChunkName: "layout" */ "../views/Forms/BasicForm"),
+          import(
+            /* webpackChunkName: "basicform" */ "../views/Forms/BasicForm"
+          ),
       },
       {
         path: "/form/step-form",
         name: "stepform",
         component: () =>
-          import(/* webpackChunkName: "layout" */ "../views/Forms/StepForm"),
+          import(/* webpackChunkName: "stepform" */ "../views/Forms/StepForm"),
         children: [
           {
             path: "/form/step-form",
@@ -65,7 +66,7 @@ const routes = [
             name: "info",
             component: () =>
               import(
-                /* webpackChunkName: "layout" */ "../views/Forms/StepForm/Step1"
+                /* webpackChunkName: "info" */ "../views/Forms/StepForm/Step1"
               ),
           },
           {
@@ -73,7 +74,7 @@ const routes = [
             name: "confirm",
             component: () =>
               import(
-                /* webpackChunkName: "layout" */ "../views/Forms/StepForm/Step2"
+                /* webpackChunkName: "confirm" */ "../views/Forms/StepForm/Step2"
               ),
           },
           {
@@ -81,7 +82,7 @@ const routes = [
             name: "result",
             component: () =>
               import(
-                /* webpackChunkName: "layout" */ "../views/Forms/StepForm/Step3"
+                /* webpackChunkName: "result" */ "../views/Forms/StepForm/Step3"
               ),
           },
         ],
@@ -107,11 +108,6 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
 
   {
     path: "*",
@@ -126,7 +122,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  // 加判断，如果同一页面不显示
+  if (to.path != from.path) {
+    NProgress.start();
+  }
+
   next();
 });
 

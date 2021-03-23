@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <a-button>Hello</a-button>
-
-      <router-link to="/dashboard/analysis">dashborad</router-link> |
-      <router-link to="/form">/form</router-link>
-    </div>
+    <div id="nav"></div>
     <router-view />
   </div>
 </template>
 
 <script>
 // import hello from "./components/HelloWorld.vue";
+// console.log("this.$route",this.$route)
+
+// console.log("this.$router",this.$router)
 export default {
   components: {
     // hello,
