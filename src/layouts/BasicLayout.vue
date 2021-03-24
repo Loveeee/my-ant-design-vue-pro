@@ -15,7 +15,9 @@
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0">
+          <!-- 这里的小按钮也要和布局保持一致，如果没有了侧边栏，要这个小按钮也没用 -->
           <a-icon
+            v-if="navLayout === 'left'"
             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
             @click="collapsed = !collapsed"
           >
