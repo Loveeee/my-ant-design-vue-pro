@@ -15,16 +15,18 @@ const routes = [
       //dashboard
       {
         path: "/",
-        redirect: "/dashborad/analysis",
+        redirect: "/dashboard/analysis",
       },
       {
-        path: "dashboard",
+        path: "/dashboard",
         name: "dashboard",
+        meta: { icon: "dashboard", title: "仪表盘" },
         component: { render: (h) => h("router-view") },
         children: [
           {
-            path: "analysis",
+            path: "/dashboard/analysis",
             name: "analysis",
+            meta: { title: "分析页" },
             component: () =>
               import(
                 /* webpackChunkName: "analysis" */ "../views/Dashboard/Analysis"
@@ -32,65 +34,73 @@ const routes = [
           },
         ],
       },
-    ],
-  },
-  {
-    path: "/form",
-    name: "form",
-    component: { render: (h) => h("router-view") },
-    children: [
       {
         path: "/form",
-        redirect: "/form/basic-form",
-      },
-      {
-        path: "/form/basic-form",
-        name: "basicform",
-        component: () =>
-          import(
-            /* webpackChunkName: "basicform" */ "../views/Forms/BasicForm"
-          ),
-      },
-      {
-        path: "/form/step-form",
-        name: "stepform",
-        component: () =>
-          import(/* webpackChunkName: "stepform" */ "../views/Forms/StepForm"),
+        name: "form",
+        meta: { icon: "form", title: "表单" },
+        component: { render: (h) => h("router-view") },
         children: [
           {
+            path: "/form",
+            redirect: "/form/basic-form",
+          },
+          {
+            path: "/form/basic-form",
+            name: "basicform",
+            meta: { title: "基础表单" },
+            component: () =>
+              import(
+                /* webpackChunkName: "basicform" */ "../views/Forms/BasicForm"
+              ),
+          },
+          {
             path: "/form/step-form",
-            redirect: "/form/step-form/info",
-          },
-          {
-            path: "/form/step-form/info",
-            name: "info",
+            name: "stepform",
+            meta: { title: "分步表单" },
+            hideChildrenInMenu: true,
             component: () =>
               import(
-                /* webpackChunkName: "info" */ "../views/Forms/StepForm/Step1"
+                /* webpackChunkName: "stepform" */ "../views/Forms/StepForm"
               ),
-          },
-          {
-            path: "/form/step-form/confirm",
-            name: "confirm",
-            component: () =>
-              import(
-                /* webpackChunkName: "confirm" */ "../views/Forms/StepForm/Step2"
-              ),
-          },
-          {
-            path: "/form/step-form/result",
-            name: "result",
-            component: () =>
-              import(
-                /* webpackChunkName: "result" */ "../views/Forms/StepForm/Step3"
-              ),
+            children: [
+              {
+                path: "/form/step-form",
+                redirect: "/form/step-form/info",
+              },
+              {
+                path: "/form/step-form/info",
+                name: "info",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "info" */ "../views/Forms/StepForm/Step1"
+                  ),
+              },
+              {
+                path: "/form/step-form/confirm",
+                name: "confirm",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "confirm" */ "../views/Forms/StepForm/Step2"
+                  ),
+              },
+              {
+                path: "/form/step-form/result",
+                name: "result",
+                component: () =>
+                  import(
+                    /* webpackChunkName: "result" */ "../views/Forms/StepForm/Step3"
+                  ),
+              },
+            ],
           },
         ],
       },
     ],
   },
+
   {
     path: "/user",
+    hideInMenu: true,
     component: () =>
       import(/* webpackChunkName: "layout" */ "../layouts/UserLayout"),
     children: [
@@ -112,6 +122,7 @@ const routes = [
   {
     path: "*",
     component: NotFound,
+    hideInMenu: true,
   },
 ];
 

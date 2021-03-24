@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { Button, Layout, Icon, Drawer, Radio } from "ant-design-vue"; //把相关组件给注册进来
+import { Button, Layout, Icon, Drawer, Radio, Menu } from "ant-design-vue"; //把相关组件给注册进来
 
 Vue.config.productionTip = false;
 Vue.use(Button);
@@ -10,6 +10,7 @@ Vue.use(Layout);
 Vue.use(Icon);
 Vue.use(Drawer);
 Vue.use(Radio);
+Vue.use(Menu);
 new Vue({
   router,
   store,
